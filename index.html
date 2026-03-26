@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Hệ Thống Quản Lý Du Lịch - BAITAPLON</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div class="bg-dark text-white p-3 vh-100 sidebar d-flex flex-column" style="width: 250px;">
+            <h4 class="text-center text-info"><i class="bi bi-airplane-engines"></i> QL Du Lịch</h4>
+            <hr>
+            <div id="sidebarMenu" class="overflow-auto flex-grow-1"></div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="flex-grow-1 p-4 bg-light">
+            <!-- Khu vực Toolbar: Tìm kiếm & Nút chức năng -->
+            <div class="row mb-4 align-items-center">
+                <div class="col-md-5">
+                    <h2 id="pageTitle" class="mb-0">Đang tải...</h2>
+                </div>
+                <div class="col-md-7 d-flex justify-content-end gap-2">
+                    <div class="input-group" style="max-width: 300px;">
+                        <input type="text" id="searchPhone" class="form-control" placeholder="Nhập SĐT khách hàng...">
+                        <button class="btn btn-warning" onclick="searchCustomerInfo()"><i class="bi bi-search"></i> Tra Cứu</button>
+                    </div>
+                    <!-- Nút import file ẩn, dùng label để bấm -->
+                    <label class="btn btn-secondary mb-0">
+                        <i class="bi bi-file-earmark-arrow-up"></i> Nhập File 
+                        <input type="file" id="importFile" accept=".json, .txt" class="d-none" onchange="importData(event)">
+                    </label>
+                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#dataModal">
+                        <i class="bi bi-plus-circle"></i> Thêm Mới
+                    </button>
+                </div>
+            </div>
+
+            <!-- Bảng Dữ Liệu -->
+            <div class="card shadow-sm">
+                <div class="card-body overflow-auto">
+                    <table class="table table-hover">
+                        <thead class="table-dark"><tr id="tableHeader"></tr></thead>
+                        <tbody id="tableBody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Form Nhập Liệu (Dùng chung) -->
+    <div class="modal fade" id="dataModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Thêm Dữ Liệu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="dataForm">
+                        <div id="formInputs"></div>
+                        <button type="submit" class="btn btn-success w-100 mt-3">Lưu Dữ Liệu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Kết quả Tra Cứu Khách Hàng -->
+    <div class="modal fade" id="searchResultModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-info text-dark">
+                    <h5 class="modal-title"><i class="bi bi-person-lines-fill"></i> Kết Quả Tra Cứu Khách Hàng</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="searchResultContent">
+                    <!-- Kết quả truy xuất chéo sẽ đổ vào đây -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
